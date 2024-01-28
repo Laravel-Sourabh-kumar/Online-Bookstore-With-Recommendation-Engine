@@ -53,13 +53,15 @@ class ShoppingCartController extends Controller
     }
     public function cart_increment($id, $quantity, $book_id)
     {
+
+     // dd($quantity);  
         $book = Book::findOrFail($book_id);
 
         if($book->quantity > $quantity)
         {
             // Cart::update($id, $quantity+1);
             Cart::update($id,[
-                'quantity' => $quantity
+                'quantity' => $quantity+1
                 ]);
             return redirect()->back();
         }
@@ -74,7 +76,10 @@ class ShoppingCartController extends Controller
 
     public function cart_decrement($id, $quantity)
     {
-        Cart::update($id, $quantity-1);
+       // dd($quantity);  
+         Cart::update($id,[
+            'quantity' => $quantity-1
+            ]);
         return redirect()->back();
     }
 }
